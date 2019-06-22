@@ -1,4 +1,29 @@
 \chapter{Design}
+This chapter will focus on the prototype VR application which will be implemented. Before starting with the development, the content of the  application has to be set. Also the requirements of the application have to be clear. For which target group the application is developed? What is the storyline of the application? How will the application be used later on? In the following, it will be shortly introduced, how the mode of operation is done during the implementation. After that the requirements will be set. A target user group for the VR application will be set, in order to start with the storyline. The application will have a fictive storyline, similar to a computer game. In order to design the story, a storyboard was created and will be presented in this chapter. Once the content is set, the thesis will take a look at HMDs and choose the suitable hardware device for the implementation.
+\section{Mode of operation}
+The objective of this thesis is to develop and evaluate a prototype VR application to display the different IT courses offered at NYP. To handle a complex task like this, it is important to apply a suitable mode of operation. For the design and development part of this thesis an agile approach is chosen. This means that the planning is done in an iterative process to remain flexible towards unexpected challenges. An agile approach does not mean that the main objective will change, but the task planning is adapted for one period and can be changed and evaluated after each iteration. Specifically for this thesis, there are weekly updates with the supervisor. During meetings , the work is reviewed and evaluated. Every six week there is a presentation of the work done for the last period and the tasks for the next six weeks are planned. \\
+The prototype application will contain five scenes for each IT course and a starting scene which connects each job role scene. The 
+
+\section{Requirements}
+The application focuses on prospective students as users. After using the VR application, they should have a clearer understanding, what the IT courses offered at NYP are about. Also they should gain a basic understaning about the jobs they can attend after getting a diploma in IT. In order to achieve this, several functional requirements have to be set:\\
+\begin{itemize}
+\item Setting: The application should take place in a futuristic environment. Users should see how they can impact the future with IT.
+\item Genre: The application should be a mix between a informative educational and a gaming application.
+\item Introduction of IT job roles: The application should introduce to the user, what the job roles are about.
+\item Separation of each job role: Each job role should be presented in a separate scene. The user should be aware of which job role the scene is referred to at all times.
+\item Completing tasks: Each introduction of a job role should contain information of the job and a task which should be completed by the user.
+\item Following a main story line: There should be a main objective and each job role task is a step towards completing the main objective.
+\item Move around freely: The user should be able to explore the virtual world freely.
+\item Gamification: The tasks should be structured as minigames and there should be a reward after completing them successfully.
+\item Educational: The user should gain more knowledge of the IT job roles after playing the VR application.
+\end{itemize}
+Besides the functional requirements, there are several non-functional requirements which have to be considered when developing the prototype:
+\begin{itemize}
+\item Portable: The application should be presented at various public events, such as open houses or fairs.
+\item: Optimised for mobile devices: The application should work on mobile devices in combination with a suitable HMD.
+\item Budget: The product will not be distributed commercially. Therefore the costs for external tools, graphic or audio assets should be held to a minimum.
+\item Offline: The application should be playable without an internet connection.
+\end{itemize}
 \section{Target group}
 \todo{outlining target group: prospective students; creating persona}
 Before starting with the design of the application, a target group has to be defined. This makes developing of the application purpose easier and also helps not to loose the focus during the design process. A very important aspect of defining a target group is also, to develop the application directly to the needs of the future users. In the end this helps to increase the acceptance of the application. 
@@ -21,7 +46,17 @@ Since the fictive person Jessica Lee's main expectation is to experience a joyfu
 \section{Main story concept}
 To gain the users attention and let them grow interest in the application it is important to have a good main story. The main story will create a bridge between the several IT courses displayed in the application.\\
 The application will start in the so called ``Smart City''. This is a futuristic urban environment in which the user can move around freely.There are five different buildings along the streets. Each building is interactive and represents a course offered by the NYP. By interacting with the buildings the user can enter laboratories, so called ``labs'', and complete different tasks. Every successful completion of a task has an impact to the main story. \\
-The main goal of the VR application is to create a delivery drone which will deliver orders from online shops, just like Amazon announced in a video of 2013 (source). This is still a vision of future for now, but it is a good showcase for the user to show them how they can impact the future with IT. During the completion of the labs several challenges will occur. Once the user started programming their first drone, a lot more drones will start flying around in Smart City. To avoid crashing and chaos, the next task is to provide a proper and stable internet connection to the drones, so they can communicate. But the connected drones have their advantages and disadvantages: At first they are flying normally and communicating to each other but then an unknown IoT-Hacker infiltrates a virus into the drone firmware, so they start to misbehave. Now the user has to trace the hacker with basic cyber security concepts. After the hacker was found, more and more inhabitants of Smart City start to use the drones and provide a lot of data. It is now the job of the user to analyse this data and optimise the drones.
+The main goal of the VR application is to create a delivery drone which will deliver orders from online shops, just like Amazon announced in a video of 2013 (source). This is still a vision of future for now, but it is a good showcase for the user to show them how they can impact the future with IT. During the completion of the labs several challenges will occur. Once the user started programming their first drone, a lot more drones will start flying around in Smart City. To avoid crashing and chaos, the next task is to provide a proper and stable internet connection to the drones, so they can communicate. But the connected drones have their advantages and disadvantages: At first they are flying normally and communicating to each other but then an unknown IoT-Hacker infiltrates a virus into the drone firmware, so they start to misbehave. Now the user has to trace the hacker with basic cyber security concepts. After the hacker was found, more and more inhabitants of Smart City start to use the drones and provide a lot of data. It is now the job of the user to analyse this data and optimise the drones. By combining relevant data, it is possible to add some enhancements to the drone.
+Once the user completed all tasks and visited all labs, the user can exit the game. \\
+It has to be mentioned that not all courses offered by NYP are covered in this main story so far. This is the case, because the application prototype will concentrate on the job role of the software engineer and the cyber security analyst. Other job professions will be added in an iterative process.
 
 \section{Storyboard}
+The main objective of a storyboard is to get a scene by scene overview of the story and the sequence of events. Through a sketch draft, an idea of the visuals of the application is displayed. Still the focus of the storyboard lies on the storyline. Logical orders of scenes are displayed through arrows, textual explanations are added, whenever necessary.\\
+For the storyboard of the prototype, a tool called invision freehand was used \cite{TODO}. In the following, some important parts of the storyboard are presented. The full storyboard can be seen in \cite{TODO}.
+\subsection{Software engineer scene}
+The first scene of the story board is the smart city scene FIG. Here the user can walk around freely. When clicked on the software engineer building, an assistant is displaying a dialog in a close up and asks the user to enter the building. If answered with "yes", there is a transition into the software engineer laboratory scene FIG. After the transition, the assistant explains the first task, the user has to do. Their job is, to arrange code fragments in a correct order. Once the task is completed
+
+\subsection{Cyber security specialist scene}
+
+
 \section{Hardware evaluation}
