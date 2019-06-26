@@ -1,35 +1,48 @@
 \chapter{Design}
 This chapter will focus on the prototype VR application which will be implemented. Before starting with the development, the content of the  application has to be set. Also the requirements of the application have to be clear. For which target group the application is developed? What is the storyline of the application? How will the application be used later on? In the following, it will be shortly introduced, how the mode of operation is done during the implementation. After that the requirements will be set. A target user group for the VR application will be set, in order to start with the storyline. The application will have a fictive storyline, similar to a computer game. In order to design the story, a storyboard was created and will be presented in this chapter. Once the content is set, the thesis will take a look at HMDs and choose the suitable hardware device for the implementation.
 \section{Mode of operation}
-The objective of this thesis is to develop and evaluate a prototype VR application to display the different IT courses offered at NYP. To handle a complex task like this, it is important to apply a suitable mode of operation. For the design and development part of this thesis an agile approach is chosen. This means that the planning is done in an iterative process to remain flexible towards unexpected challenges. An agile approach does not mean that the main objective will change, but the task planning is adapted for one period and can be changed and evaluated after each iteration. Specifically for this thesis, there are weekly updates with the supervisor. During meetings , the work is reviewed and evaluated. Every six week there is a presentation of the work done for the last period and the tasks for the next six weeks are planned. \\
-The prototype application will contain five scenes for each IT course and a starting scene which connects each job role scene. The 
+The objective of this thesis is to develop and evaluate a prototype VR application to display the different IT courses offered at NYP. To handle a complex task like this, it is important to apply a suitable mode of operation. For the design and development part of this thesis an agile approach is chosen. This means that the planning is done in an iterative process to remain flexible towards unexpected challenges. An agile approach does not mean that the main objective will change, but the task planning is adapted for one period and can be changed and evaluated after each iteration. Specifically for this thesis, there are weekly updates with the supervisor. During meetings, the work is reviewed and evaluated. Every six week there is a presentation of the work done for the last period and the tasks for the next six weeks are planned.\\
+Each IT course, which is planned to be represented in the VR application will be treated separately. This means, that during an iteration, not more than one job role will be in focus of the design and development part.  
 
 \section{Requirements}
-The application focuses on prospective students as users. After using the VR application, they should have a clearer understanding, what the IT courses offered at NYP are about. Also they should gain a basic understaning about the jobs they can attend after getting a diploma in IT. In order to achieve this, several functional requirements have to be set:\\
+The application focuses on prospective students as users. After using the VR application, they should have a clearer understanding, what the IT courses offered at NYP are about. Also they should gain a basic understanding about the jobs they can attend after getting a diploma in IT. In order to achieve this, several functional requirements have to be set:\\
 \begin{itemize}
-\item Setting: The application should take place in a futuristic environment. Users should see how they can impact the future with IT.
-\item Genre: The application should be a mix between a informative educational and a gaming application.
 \item Introduction of IT job roles: The application should introduce to the user, what the job roles are about.
+\item Start scene: The application starts in a futuristic city which can be explored by the user.
+\item Interaction with items: The user can interact with several objects in the starting scene and enter different scenes through this.
 \item Separation of each job role: Each job role should be presented in a separate scene. The user should be aware of which job role the scene is referred to at all times.
 \item Completing tasks: Each introduction of a job role should contain information of the job and a task which should be completed by the user.
 \item Following a main story line: There should be a main objective and each job role task is a step towards completing the main objective.
-\item Move around freely: The user should be able to explore the virtual world freely.
 \item Gamification: The tasks should be structured as minigames and there should be a reward after completing them successfully.
-\item Educational: The user should gain more knowledge of the IT job roles after playing the VR application.
+
 \end{itemize}
 Besides the functional requirements, there are several non-functional requirements which have to be considered when developing the prototype:
 \begin{itemize}
+\item Setting: The application should take place in a futuristic environment. Users should see how they can impact the future with IT.
+\item Genre: The application should be a mix between a informative educational and a gaming application.
+\item Educational: The user should gain more knowledge of the IT job roles after playing the VR application.
 \item Portable: The application should be presented at various public events, such as open houses or fairs.
-\item: Optimised for mobile devices: The application should work on mobile devices in combination with a suitable HMD.
 \item Budget: The product will not be distributed commercially. Therefore the costs for external tools, graphic or audio assets should be held to a minimum.
-\item Offline: The application should be playable without an internet connection.
 \end{itemize}
+
+\section{Stakeholders}
+This chapter defines the different actors for the VR application. After answering the question of what to do, we will answer the question of who will do it. This will be done by naming the different stakeholders of the application.
+\begin{itemize}
+\item School of Information Technology
+\item Project leader
+\item Prospective students
+\item Developer
+\end{itemize}
+These stakeholders have different interests and expectations to the project. The School of Information Technology would like to have more students signing up for an IT course. They expect that the VR application arouses interest in IT by prospective students. Their task is to provide the application at public events, such as open houses and similar events. The School of Information Technology is also responsible for providing the IT courses which are introduced in the VR application. \\
+The project leader expects a structured and well communicated application development. They expect that the objectives of the work is clear and the deadlines are met. The project leader is responsible for the guidance of the developers and the communication between the customer (School of IT) and the developers. The project leader sets and monitors the milestones in collaboration with the developers.\\
+The prospective students are the end users of the VR application. They expect a diverting experience while using the application. They also want to learn more about the IT courses offered at NYP. Their task is to play the actual application. In case they are interested in one of the IT courses, they are responsible in applying for a diploma course at NYP.\\
+The developers expect clear objectives from the project leader and a detailed description of the requirements. Their responsibility is to provide the actual application based on the frame given by the project leader and the customer. They develop a storyline, program the application and test it as well. In close communication with the project leader, they apply changes to the system.
 \section{Target group}
 \todo{outlining target group: prospective students; creating persona}
 Before starting with the design of the application, a target group has to be defined. This makes developing of the application purpose easier and also helps not to loose the focus during the design process. A very important aspect of defining a target group is also, to develop the application directly to the needs of the future users. In the end this helps to increase the acceptance of the application. 
 
 The main target group of the virtual reality application will be prospective students, who are thinking of taking a diploma at NYP. As mentioned in the introduction, those students mostly come from a secondary school and have finished their O-Levels, which is an entry requirement for polytechnics. The secondary school educated the students on a very widespread basis, and the students can now decide their specialisation. \\
-When the students leave their secondary school, the average age is ??. In this age, people are known to be open to new technologies and trends. Also, the people in the target group are in the stage to make independent decisions for themselves without influence of parents. The application will be designed for prospective student, which show an interest in information technology but yet have no experience or knowledge in that field.\\
+When the students leave their secondary school, the average age is 16. In this age, people are known to be open to new technologies and trends. Also, the people in the target group are in the stage to make independent decisions for themselves without influence of parents. The application will be designed for prospective student, which show an interest in information technology but yet have no experience or knowledge in that field.\\
 In the following, a characteristic of a fictive person is displayed. This person stands as a representative for the target group of prospective students:
 
 \paragraph{Characteristics}
@@ -51,12 +64,12 @@ Once the user completed all tasks and visited all labs, the user can exit the ga
 It has to be mentioned that not all courses offered by NYP are covered in this main story so far. This is the case, because the application prototype will concentrate on the job role of the software engineer and the cyber security analyst. Other job professions will be added in an iterative process.
 
 \section{Storyboard}
+In this chapter, the structure and the details of the main storyline are explained with the use of a storyboard. Since the requirements for the prototype application are already set, the storyboard points out the details of the requirements in a visual way.
 The main objective of a storyboard is to get a scene by scene overview of the story and the sequence of events. Through a sketch draft, an idea of the visuals of the application is displayed. Still the focus of the storyboard lies on the storyline. Logical orders of scenes are displayed through arrows, textual explanations are added, whenever necessary.\\
-For the storyboard of the prototype, a tool called invision freehand was used \cite{TODO}. In the following, some important parts of the storyboard are presented. The full storyboard can be seen in \cite{TODO}.
+For the storyboard of the prototype, a tool called invision freehand is used \cite{TODO}. In the following, some important parts of the storyboard are presented. The complete storyboard can be seen in \cite{TODO}.
 \subsection{Software engineer scene}
-The first scene of the story board is the smart city scene FIG. Here the user can walk around freely. When clicked on the software engineer building, an assistant is displaying a dialog in a close up and asks the user to enter the building. If answered with "yes", there is a transition into the software engineer laboratory scene FIG. After the transition, the assistant explains the first task, the user has to do. Their job is, to arrange code fragments in a correct order. Once the task is completed
-
+The first scene of the storyboard is the smart city scene FIG. Here the user can walk around freely. When clicked on the software engineer building, an assistant asks the user to enter the building. If answered with "yes", there is a transition into the software engineer laboratory scene FIG. The laboratory contains a testing drone and a package as well as working desks with laptops. After the transition, the assistant explains the first task, the user has to do. This is the first minigame, in which the user should gain understanding in how programming works. The information is taught in a very simplfied way, because the requirements of the application are, that it is playable without knowledge in IT. The objective of the task is to program the package delivery drone, so that it actually picks up a package. This is done by arranging lines of code in a logical order. The working environment is a desk with a laptop. After the user has arranged and ran the code successfully, they can watch the testing drone in the lab picking up the package. With the completion of this minigame, the scene ends and the user is transferred back to the world scene.
 \subsection{Cyber security specialist scene}
-
+The second scene represents the job role of the cyber security specialist. The scene is a laboratory with several office working places and the drone from the previous scene, which is displayed on a table in the middle of the room. When the user enteres the lab, it is explained, that the drone, they had programmed before, was corrupted by an unknown hacker. During the next task, the user should gain knowledge in the methods, cyber security specialists use to investigate digital crimes. The user learns about simple data decoding and encoding as well. The minigame is divided into three parts. In the first part, the user searches the log data of the drone for unauthorized access and marks suspicious entries. It turned out that two lab employees have accessed the drone during the last 24 hours. The second part of the minigame is to search the computers of the two lab employees for further information. One employee has a encoded message on their desktop. The last part is to decode the message by trying out different commonly used codes. The message reveals the hacker and the person can be prosecuted. This marks the end of the cyber security specialist scene.
 
 \section{Hardware evaluation}
