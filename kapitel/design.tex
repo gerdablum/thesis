@@ -67,9 +67,53 @@ It has to be mentioned that not all courses offered by NYP are covered in this m
 In this chapter, the structure and the details of the main storyline are explained with the use of a storyboard. Since the requirements for the prototype application are already set, the storyboard points out the details of the requirements in a visual way.
 The main objective of a storyboard is to get a scene by scene overview of the story and the sequence of events. Through a sketch draft, an idea of the visuals of the application is displayed. Still the focus of the storyboard lies on the storyline. Logical orders of scenes are displayed through arrows, textual explanations are added, whenever necessary.\\
 For the storyboard of the prototype, a tool called invision freehand is used \cite{TODO}. In the following, some important parts of the storyboard are presented. The complete storyboard can be seen in \cite{TODO}.
-\subsection{Software engineer scene}
-The first scene of the storyboard is the smart city scene FIG. Here the user can walk around freely. When clicked on the software engineer building, an assistant asks the user to enter the building. If answered with "yes", there is a transition into the software engineer laboratory scene FIG. The laboratory contains a testing drone and a package as well as working desks with laptops. After the transition, the assistant explains the first task, the user has to do. This is the first minigame, in which the user should gain understanding in how programming works. The information is taught in a very simplfied way, because the requirements of the application are, that it is playable without knowledge in IT. The objective of the task is to program the package delivery drone, so that it actually picks up a package. This is done by arranging lines of code in a logical order. The working environment is a desk with a laptop. After the user has arranged and ran the code successfully, they can watch the testing drone in the lab picking up the package. With the completion of this minigame, the scene ends and the user is transferred back to the world scene.
+\subsection{World scene and software engineer scene}
+\begin{figure}[h!]
+  \includegraphics[width=8cm]{kapitel/storyboard/smart-city.PNG}
+  \centering
+  \caption{Smart city scene from where the user can explore different IT job roles.}
+  \label{fig:smartcity}
+\end{figure}
+The first scene of the storyboard is the smart city scene, as sketched in figure \ref{fig:smartcity}. Here the user can walk around freely. When clicked on the software engineer building, an assistant asks the user to enter the building. If answered with "yes", there is a transition into the software engineer laboratory scene. The laboratory contains a testing drone and a package as well as working desks with laptops. After the transition, the assistant explains the first task, as displayed in \ref{fig:sescene}. This is the first minigame, in which the user should gain understanding in how programming works.
+\begin{figure}[h!]
+  \includegraphics[width=16cm]{kapitel/storyboard/se-scene.PNG}
+  \centering
+  \caption{Software engineer scene: dialog and minigame}
+  \label{fig:sescene}
+\end{figure}
+\\The information is taught in a very simplfied way, because the requirements of the application are, that it is playable without knowledge in IT. The objective of the task is to program the package delivery drone, so that it actually picks up a package. This is done by arranging lines of code in a logical order. The working environment is a desk with a laptop. After the user has arranged and ran the code successfully, they can watch the testing drone in the lab picking up the package. With the completion of this minigame, the scene ends and the user is transferred back to the world scene.
 \subsection{Cyber security specialist scene}
-The second scene represents the job role of the cyber security specialist. The scene is a laboratory with several office working places and the drone from the previous scene, which is displayed on a table in the middle of the room. When the user enteres the lab, it is explained, that the drone, they had programmed before, was corrupted by an unknown hacker. During the next task, the user should gain knowledge in the methods, cyber security specialists use to investigate digital crimes. The user learns about simple data decoding and encoding as well. The minigame is divided into three parts. In the first part, the user searches the log data of the drone for unauthorized access and marks suspicious entries. It turned out that two lab employees have accessed the drone during the last 24 hours. The second part of the minigame is to search the computers of the two lab employees for further information. One employee has a encoded message on their desktop. The last part is to decode the message by trying out different commonly used codes. The message reveals the hacker and the person can be prosecuted. This marks the end of the cyber security specialist scene.
+The second scene represents the job role of the cyber security specialist. The scene is a laboratory with several office working places and the drone from the previous scene, which is displayed on a table in the middle of the room. When the user enteres the lab, it is explained, that the drone, they had programmed before, was corrupted by an unknown hacker. During the next task, the user should gain knowledge in the methods, cyber security specialists use to investigate digital crimes. The user learns about simple data decoding and encoding as well. The minigame is divided into three parts. 
+\begin{figure}[h!]
+  \includegraphics[width=16cm]{kapitel/storyboard/cyber-analyst1.PNG}
+  \centering
+  \caption{Cyber security specialist scene: searching log entries}
+  \label{fig:logscene}
+\end{figure}
+\\In the first part, the user searches the log data of the drone for unauthorized access and marks suspicious entries, which can be seen in figure \ref{fig:logscene}. It turned out that two lab employees have accessed the drone during the last 24 hours. The second part of the minigame is to search the computers of the two lab employees for further information. 
+\begin{figure}[h!]
+  \includegraphics[width=8cm]{kapitel/storyboard/cyber-analyst3.PNG}
+  \centering
+  \caption{Cyber security specialist scene: encrypted message}
+  \label{fig:logscene2}
+\end{figure}
+One employee has an encoded message on their desktop (figure \ref{fig:logscene2}).\\ The last part is to decode the message by trying out different commonly used codes. The message reveals the hacker and the person can be prosecuted. This marks the end of the cyber security specialist scene.
 
 \section{Hardware evaluation}
+Looking at the requirements, one of the constraints for the application is, that it should be portable. Another requirement is, that the budget should be held to a minimum. This limits the number of hardware devices, which can be used within the VR application. When it comes to choosing a HMD, there is the decision between mobile HMD and desktop HMD. Since a mobile HMD fulfills the requirement of portability better than the dektop linked version, this is the preferred HMD.\\
+Looking
+\section{User interactions}
+\todo{ Which interaction methods are chosen for this application? What makes sense? What are the constraints by the hardware? Regarding to the target group and their world knowledge, what concepts can be reused?}
+
+Chapter ?? already introduced the reader to the different user interaction methods in VR, which are commonly used. This chapter looks at the different methods and evaluates, which one fits the most for the use case of the prototype VR application. There are several constraints and limitations in user interactions made by the chosen hardware and the budget for the project. The user interaction should also fit to concepts which are already known by the target user group.\\
+The following input methods are available with the Samsung Gear VR: A wireless handheld controller or a touchpad attached to the HMD. \\
+The wireless controller can either be used with the left or right hand. In order to use the controller, it has to be connected with the phone via bluetooth. To register user input there are several buttons/touchpads. The trigger button is a primary button, which can be pressed with the index finger. There is a touchpad which registers the thumb position and has a primary button as well. The last primary button is the back  button. The controller registers the hand/arm rotation through sensors. There are the home buttons and the volume buttons, which are reserved by the system.\\
+The touchpad is located on the right side of the HMD and registers touch position and touch gestures. Unlike the handheld controller, the touchpad does not need to be connected manually and always registers user input, when the HMD is used. It is therefore often used as a backup solution, in case no bluetooth controller is connected. However, the application won't be available on the consumer market. It will be primary used during public events and the usage is guided by supervisors. They can ensure to connect a controller before playing the application. Therefore, the user input development will be focused on the usage of the handheld controller.\\
+Looking at the story board there can be several user interactions extracted:
+\begin{itemize}
+\item Relocating in the virtual world
+\item Selection of objects
+\item Relocating objects
+\item Navigating through dialogs
+\end{itemize}
+First of all, we take a look at relocating in the virtual world, which is walking in VR in other words. Natural walking methods cannot be used because of missing hardware sensors. With the use of the handheld controller, the teleporting method or the camera manipulation method can be used. Since the target group are primary students which are experienced in the usage of digital media, the method of the camera manipulation is chosen. It is expected, that the target group is already introduced to this kind of relocating, since it is widely used in computer games. To reduce the risk of motion sickness, the walking speed is held slow. The user can start walking when pressing the index trigger button. The direction of walking can be changed by moving the head.\\
