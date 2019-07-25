@@ -12,7 +12,7 @@ For the development of this prototype VR application, the game engine Unity and 
 \subsection{Unity Editor}
 The Unity editor is the main too, which is used while creating the prototype. In the editor, game objects can be modified, the game can be compiled and tested. The editor view is organized in smaller windows which can be rearranged and each covers a functionality. The most important windows are the scene view, the inspector view, the game view and the hierarchy view. Figure \ref{fig:unity-editor} shows a screenshot of the unity editor and the different windows attached to it. In the top left corner there is the scene view with the game view underneath. The middle top window shows the hierarchy view. The right column is the inspector view. In the following the main functionalities of the views are described:
 \paragraph{Scene view}
-In the scene view, game objects can be placed, relocated and modified in the game scene. Game obejcts in unity are a very important concept. They can be 3D world objects, lights, cameras and special effects. A game object can also be seen as a container which can contain other game objects. The scene view is the most important view in the Unity editor, because from there, the whole look of the game scene is defined.
+In the scene view, game objects can be placed, relocated and modified in the game scene. Game objects in unity are a very important concept. They can be 3D world objects, lights, cameras and special effects. A game object can also be seen as a container which can contain other game objects. The scene view is the most important view in the Unity editor, because from there, the whole look of the game scene is defined.
 \paragraph{Inspector view}
 The inspector view shows the details of a selected component. From there, the the detail properties of the objects can be seen and components can be attached and modified. A component in unity defines a specific property and always belongs to a game object. Every game object can have a variety of components attached. Components can change the appearance and behaviour of a game object in the game. There are several build in components available in unity, but through the scripting API it is possible to create highly customisable components. The inspector gives an overview about all components of the selected game object. New components can be attached in this view, and existing components can be deleted or modified.
 \paragraph{Hierarchy view}
@@ -28,19 +28,79 @@ The game view shows a preview of the outcome for the game. It is a view rendered
 \subsection{Scripting in Unity}
 Unity provides a variety of predefined components, which can be attached to game objects, such as a Rigidbody for physical behaviour or an Audio source for playing music. However, for customizing the behaviour of a game object, it is possible to create components and attach a script to it. A script can either be written in C\# or a  modified JavaScript by Unity. For this prototype application, C\# is chosen, because it is the wider used programming language within the Unity community. Every component is a class and inheritates from the MonoBehaviour class. Through the scripting API all existing game objects and their components can be accessed and modified, it is possible to create new game objects, react to events, load new scenes and control the game flow. The MonoBehaviour class contains several methods which can be overwritten to execute code at some different lifecycle events. The update method for example is called every frame update of the game object. It can be used for example to get continues updated values from the game object. The start method is called once before the gameplay starts. This method is mostly used for initialization of other game objects or components.\\
 In general, all rules, best practices and design patterns which are common in the .NET environment can be used within Unity as well. Unity uses some special concept of dependency injection, which is very important and will be explained shortly because it is often used in the prototype application: Every object variable which has public access in a class will be visible in the component in the inspector view. It is now possible to inject a reference to that variable by drag and drop a game object or a component to the variable in the inspector view. There is no need to initialize the variable in the code. Public primitive variables can also be modified through the inspector view.
-\subsection{Unity and Samsung Gear VR support}
+\subsection{Unity and Samsung Gear VR support} \label{gearvrsupport}
 \todo{describe registering device}
 In Unity, VR support can simply be enabled by ticking a box in the player settings. However, to make a game which is compatible with the Samsung Gear VR, more work than that has to be done. First of all, the Occulus support library has to be imported. It can be downloaded from the Unity asset store. This library is shortly introduced in chapter \ref{sdksupport} and contains a variety of components and prefabs. For this prototype the OVRCharacterController prefab from the SDK is used. It contains all necessary scripts and objects for the communication between Unity and the VR hardware. The OVRCharacterController is a first person controller which can be used in the VR environment. With the use of this prefab it is also easy to set up the Samsung Gear VR handheld controller support. The prefab contains a script called OVRInput which can register connected controllers and input events. However, the OVRCharacterController prefab is missing a handheld controller representation within the game. The user needs this kind of representation in order to see the movements of their hand while playing the game. Occulus provides a handheld controller game object. This object simply has to be attached to the OVRCharacterController prefab. Once the controller object is attached, the movements of the user's hand get automatically mapped to the virtual controller in the game. To realize selecting and object manipulation with this handheld controller, more adaptions have to be done. How this is solved is described in chapter \ref{inputmethods}.
 
 \section{Scene design of different scenes}
+TODO: maybe leave this chapter out, replace with skeleton of scene (FPS, main camera, reused components???)\\
 Before starting to program the game logic, the outlook of the scenes has to be designed. This is an important step in the implementation because the look of the environment defines a first impression and is a factor when it comes to immersion. The more realistic the environment is designed, the more present users feel in the virtual world.
 \subsection{Skyboxes}
 Skyboxes are a concept in unity to design the background of the game. They are wrapped around the scene and give an impression of a wider environment. Mostly a skybox contains a 360 degree image. When moving around in a virtual world, the skybox image does not come closer, just as a horizon in a real environment.\\
 For the prototype, an image with an urban environment is chosen. The image is a 360 photography of a place in a city surrounded by skyscrapers (TODO image). This image gets attached to the skybox component of the main camera. The image is used in all scenes, the world scene as well as the different laboratory scenes, to state out that the user has not left the city.
 \subsection{World scene design}
+According to the storyboard, the world scene is the initial scene which contains a city. From that point various laboratories can be entered.
 
 \subsection{Software engineer scene design}
 \section{VR specific problems}
+--> TODO describe the multi platform feature of unity in more detail.
+In the beginning of the implementation, the HMD was not available yet. Therefore, the initial gameplay programming had to be done without the use of VR. Luckily, unity is a multi engine platform, so the development could be done for a desktop pc as a target build. The scene design and the basic gameplay mechanics were done independently from the target platform. \\
+However, although the application is able to run on desktop as well as on a mobile device in combination with the Gear VR, some mechanics and the user input concepts differ in each platform. This section describes, what problems occured when switching the target platform to a mobile VR target. It also explains, how the problems were solved. The objective of this section is to make the application runnable and playable on the desktop target platform as well as on the mobile VR target platform without the need to change the code. This is an important requirement, because during the development, a quick testing in the editor gameplay mode is necessary. 
 \subsection{Input methods with Samsung Gear VR controller} \label{inputmethods}
+The Samsung Gear VR provides support for user input in different ways. On the right side of the HMD is a touchpad attached. Common gestures like taping and swiping can be performed on the touchpad. The HMD transfers the input commands directly into the VR application. In the implementation of this prototype, the touchpad is not used as an input method. Instead, the Samsung Gear VR handheld controller is used. Nevertheless, the HMD touchpad should be seen as a fallback solution, in case there is no handheld controller available. Adding a support for the HMD touchpad input method is therefore a feature which should be added in the future.\\
+The Samsung Gear VR handheld controller can either be used with the left or right hand. This controller is connected to the phone via bluetooth. The controller offers more possibilities for user input than the touchpad at the HMD. Figure \ref{fig:controller} displays the input buttons of the controller in more detail.
+A very important feature of the handheld controller is also that the controller has sensors to detect its rotation. With this functionality it is possible to point at objects in the game to select them.\\
+\begin{figure}[h!]
+  \includegraphics[width=8cm]{kapitel/samsung-controller.jpg}
+  \centering
+  \caption{Handheld controller with button description. Edited from \cite{Samsung.2019b}}
+  \label{fig:controller}
+\end{figure}
+When switching from the desktop platform to the mobile VR target platform with the handheld controller, following input methods need to be implemented in a different way:
+\begin{itemize}
+\item Looking around
+\item Relocating
+\item Selection of objects
+\end{itemize}
+Looking around in the game is done by a component named MouseLook in the desktop target platform version of the game. This component is a script from the unity standard assets, which is a free utilities library available in the asset store. It manages looking around in a first person view in the direction of the mouse position. When switching the target platform to mobile VR, no mouse position is available, therefore the script does not work. Instead of the MouseLook script, the OVRPlayerController, which was described in chapter \ref{gearvrsupport} is attached to the first person controller. It manages looking around in the direction of the head movement instead of the mouse movement.\\
+Relocating on the desktop target platform is done with the WASD keys of the keyboard, an input method used in many computer games. The movement is also implemented by a script from the unity standard assets. However, in a virtual environment it is not possible to use the keyboard. Instead, the relocation is done by pressing the trigger button to move forward with a constant speed. The direction of moving is set by the direction in which the user is currently looking. The implementation of this relocating is very straightforward: TODO insert code.\\
+Selection of objects is done with the ray-casting method in both target platforms. How ray-casting in unity works, is seen in example \ref{raycastcode}. 
+\begin{lstlisting} 
+RaycastHit hit;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        
+        if (Physics.Raycast(ray, out hit)) {
+            Transform objectHit = hit.transform;
+        }
+\end{lstlisting}
+\label{raycastcode}
+\captionof{lstlisting}{simple ray-casting }
+First of all a ray is created from a fixed starting point. If the ray hit an object, this object is stored as a Hit in the variable hit. The difference of ray-casting on the desktop and the VR version is that the ray comes from the center of the main camera on the desktop version, whereas in the VR version the ray is initialized from the controller model in the game. In order to make the game work on the Samsung Gear VR, the initialization of the ray has to be changed to the following:
+\begin{lstlisting} 
+RaycastHit hit;
+        if (Physics.Raycast(controller.transform.position,
+         controller.transform.forward, out hit))
+        {
+            return hit.collider.gameObject;
+        }
+\end{lstlisting}
+\captionof{lstlisting}{Ray initialized from the controller representation in the game}
+
+In this code example, the ray is created and in the same time, the condition if there is a hit is checked.
+When changing every ray creation which is done in the game's code to the above showed solution, the game is working on the mobile VR platform but it is not working on the desktop target platform or in the unity editor gameplay mode anymore. In order to use ray-casting on every target platform without changing the code every time, an additional class has to be added. This class is able to detect, which is the current target platform and also if the game is running in the editor gameplay mode. The class creates the ray from either the main camera or the current connected controller depending on the current target platform. It is also able to detect, if a controller is connected and if the controller is set as left or right hand used. In the UML-diagram in figure \ref{fig:uml-universalinput}, the UniversalInput class fulfills the above explained functionalities. The controller classes of the different game scenes use the methods of the UniversalInput class to get the selected object from the ray. It is now possible to play the application with the Samsung Gear VR and use the controller to point at selectable objects. At the same time, the game can be played on a desktop with selecting objects through the main camera focus.
+\begin{figure}[h!]
+  \includegraphics[width=13cm]{kapitel/uml-input.jpg}
+  \centering
+  \caption{UML class diagram for managing different target platforms}
+  \label{fig:uml-universalinput}
+\end{figure}
 \subsection{Implementation of the dialogue system}
+The application contains several conversations with the virtual assistant, as seen in chapter \ref{design}. The dialogues between the virtual assistant and the user take place in various places in the game and after different events. The implementation of the dialogue component contains setting the input texts, animating the text appearance during the dialogue, controlling user input and displaying the right dialogue texts at the right time. Especially the last task is a challenge, looking at the fact that the game is organized by unity in a stateless game loop. The dialogue component is implemented as a reusable component. It should be possible to add new sentences or change the appearance of the sentences without significant expense.\\
+The dialoque component is a combination of the dialogue script and the dialogue panel, a game object which contains the text and the user input buttons (see figure TODO). The dialogue script is attached to an empty game object named DialogManager. From there, references to the dialogue panel are set. The sentences, which should be displayed by the dialogue system are represented as a string field in the dialogue script. Every entry of a field is the text which should be displayed on the panel. When the user clicks the continue button, the next entry from the string field is displayed. This variable has a public accessory. Therefore the content of the dialogue can be changed by any class at any time. \\
+The dialogue script has a public method called StartTyping which invokes displaying of the sentences in the string field with a typewriting animation. It also handles the continue button click by the user. Once every sentence is displayed, the dialogue panel disappears automatically. In the scene controller class, it is only necessary to set the content of the sentences and to invoke the StartTyping method. \\
+To display questions and react to answers of the users, it is possible to customize the buttons appearing on the dialogue panel. Every button click invokes a callback, which is an interface method. This interface can be implemented individually by the controller classes. The appearance of the dialogue panel with the right sentences at the right time can also be managed in the controller classes. This is done by implementing a state machine pattern. The DialogManager class holds a reference of a stateMachine variable which is also an interface. The reference is set inside the controller classes. A state machine is an object which implements the IStateMachine interface. The method NextState() performs a step through the state machine. The variable current returns the current state, the state machine is at the moment. Every state describes an event or a position in the game. Because the DialogManager is a reusable component, it should not know in which state the game is currently. The task of the DialogManager class is only to display all referred sentences when the method is invoked. After all sentences are displayed, the NextState() method is called, to let the controller classes know, that the displaying of the dialog is finished. 
+\begin{lstlisting} 
+//TODO insert code example
+\end{lstlisting}
 \subsection{User guidance}
+\captionof{lstlisting}{}
