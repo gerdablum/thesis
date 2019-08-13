@@ -15,8 +15,9 @@ for age in xData:
 
 print(quantity)
 plt.plot(ages, quantity)
+plt.title('Age of participants')
 plt.axis([5, 60, 0, 10])
-plt.xticks(np.arange(5, 60, 5)) 
+plt.xticks(np.arange(5, 60, 1)) 
 plt.yticks(np.arange(0, 10, 1)) 
 plt.xlabel('Quantity')
 plt.ylabel("Age")
