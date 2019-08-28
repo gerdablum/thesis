@@ -27,14 +27,13 @@ The last questions are about general feedback for the application. Questions in 
 The overall hypothesis of this project is, whether the application helps students in improving their understanding of IT job roles.
 In order to approve or disapprove this thesis, the three statements of the second and third question groups are evaluated.\\
 The fourth and fifth question group affect the effectiveness of the VR application indirectly. This questions ask about the immersion of the user and evaluate the user guidance of the game. Based on the results of this part of the test, improvements in the user experience can be made which should improve the overall experience and increase presence.
+\newpage
 \subsection{Effectiveness of the VR prototype}
 The testing method which is used is the paired t-test. This test was applied with the answer data before playing the prototype and the answers after playing the prototype. The difference of both data sets is expressed through the variable $\mu_d$, which is the subtraction between after playing values and before playing values .\\
 To evaluate the statements, we create a null hypothesis and an alternative hypothesis. The null hypothesis in this test is: "There is no improvement in the statement evaluation after playing the prototype.", so it is $ H_0 : \mu_d \leq 0$. \\
 The alternative hypothesis is: "The statement evaluation is higher after playing the prototype.", therefore it is $H_1 : \mu_d > 0$. As a significance level $ \alpha = 0.05 $ is chosen.\\
-
-Applying the paired t-test to the three statement, we get the results seen in table \ref{tab:ttest-results}.
 \renewcommand{\arraystretch}{1.5}
-\begin{table}[]
+\begin{table}[h]
 \begin{tabular}{|l|l|l|}
 \hline
 statement                                                                                                                      & t-value & p-value                      \\ \hline
@@ -45,6 +44,8 @@ statement                                                                       
 \caption{Paired t-test results for the three statements}
 \label{tab:ttest-results}
 \end{table}
+
+Applying the paired t-test to the three statement, we get the results seen in table \ref{tab:ttest-results}.
 Looking at the p variables, all three values are below $ \alpha = 0.05 $, which means that the probability that $ H_0 $ is true is below 5\%. This means that the null hypothesis can be discarded.\\
 With a significance level of 0.05, is is therefore true that the evaluation of the three statements is higher after playing the prototype. 
 
@@ -76,7 +77,7 @@ In order to evaluate the grade of immersion in the game, the quantity of the opt
 %\end{figure}
 24 out of 27 test persons either agreed or strongly agreed to the statement from figure \ref{fig:chart-immersion-1}. None of the test persons chose on of the disagreeing options. Only one person had a neutral position to the statement. A similar result could be seen in the evaluation of the statement "I lost track of time". 26 out of 17 persons either agreed or strongly agreed to the statement, only one person slightly agreed. \\
 A little different results can be seen int the evaluation of the statement "The interactions with the virtual environment felt natural for me" from figure \ref{fig:chart-immersion-2}. The majority of test persons, 18 out of 27 agreed to the statement, but only 2 strongly agreed. 2 persons disagreed or slightly disagreed to the statement.\\
-Another relevant result from the user test is, how clear the instructions were and how difficult the mini game was for the participants. As seen in figure \ref{fig:chart-guidance-1}, 5 persons slightly disagreed to the statement "I knew what to do all the time during the game". The most frequently chosen answer was slightly agree. 
+Another relevant result from the user test is, how clear the instructions were and how difficult the mini game was for the participants. As seen in figure \ref{fig:chart-guidance-1}, 5 persons slightly disagreed to the statement "I knew what to do all the time during the game". The most frequently chosen answer was slightly agree. In the statement "I found it easy to complete the task in the software engineering lab", 10 persons strongly agreed, whilst 1 person disagreed and 8 participants only slightly agreed to the statement. This results match with the subjective observations of the supervisors during the tests. Some test persons had no problems at all with solving the mini game, others struggled and could not solve the game without help.
 \begin{figure}[h!]
   \includegraphics[width=10cm]{kapitel/charts/guidance-1.png}
   \centering
@@ -84,4 +85,7 @@ Another relevant result from the user test is, how clear the instructions were a
   \label{fig:chart-guidance-1}
 \end{figure}
 \subsection{Discussion}
-In general, the participants felt very immersed with the virtual world. Although the interactions in the game did not feel natural for some test persons, the overall result of the immersion question group was alladeen. The reasons for the slight 
+In general, the participants felt very immersed with the virtual world. Although the interactions in the game did not feel natural for some test persons, the overall result of the immersion question group was positive. The reasons, why some persons found the interactions not very natural can be because of hardware limitations. The device, which was tested on only had one handheld controller and there were no body positioning trackers available. Therefore, to create a game with a higher level of physical immersion, a HMD with more sensors and more immerse controller mechanisms should be used. \\
+The mini game and the free exploration in the beginning of the game helped that the user felt involved in the game. The majority of test persons is pleased with the user involvement.\\
+When it comes to user guidance, the majority of test persons did not know what to do during the game all the time. Reasons for this results could either be misunderstanding instructions by the assistant or a poor guidance to the next task, e.g. finding the interactive desk in the software engineering scene. To improve the user guidance, the assistant dialogue in the beginning was changed to have a clear instruction to find interactive buildings. More description hint labels were added to interactive objects. In the software engineer scene for example, a hint showed up to click on the chair to start the mini game when pointed it.
+Looking at the mini game, some person rated it to be slightly too difficult. This was also an observation we made when executing and supervising the test. It was observed that some  people needed help from someone who already knows how to solve the mini game. Based on this results, we decided to make the mini game in the software engineer scene easier. To help the test persons in finding the correct order, the shape of the code plates was changed to look like a puzzle. This should indicate the correct order of the code fragments. The idea was inspired by the educational programming language scratch \cite{https://scratch.mit.edu/}.
