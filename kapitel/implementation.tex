@@ -102,7 +102,7 @@ When switching from the desktop platform to Android platform with the handheld c
 \item Relocating
 \item Selection of objects
 \end{itemize}
-Looking around in the game is done by a component named \texttt{MouseLook} in the desktop version of the game. This component is a script from the Unity standard assets which is a free utilities library available in the asset store. It manages looking around in a first person view in the direction of the mouse position. When switching the target platform to mobile VR, no mouse position is available, therefore the script does not work. Instead of the \textt{MouseLook} script, the \texttt{OVRPlayerController}, which was described in chapter \ref{gearvrsupport} is attached to the first person controller. It manages looking around in the direction of the head movement instead of the mouse movement.\\
+Looking around in the game is done by a component named \texttt{MouseLook} in the desktop version of the game. This component is a script from the Unity standard assets which is a free utilities library available in the asset store. It manages looking around in a first person view in the direction of the mouse position. When switching the target platform to mobile VR, no mouse position is available, therefore the script does not work. Instead of the \texttt{MouseLook} script, the \texttt{OVRPlayerController}, which was described in chapter \ref{gearvrsupport} is attached to the first person controller. It manages looking around in the direction of the head movement instead of the mouse movement.\\
 Relocating on the desktop target platform is done with the WASD keys of the keyboard, an input method used in many computer games. The movement is also implemented by a script from the Unity standard assets. However, in a virtual environment it is not possible to use the keyboard. Instead, the relocation is done by pressing the trigger button of the controller to move forward with a constant speed. The direction of moving is set by the direction in which the user is currently looking.\\
 \begin{figure}[h!]
   \includegraphics[width=13cm]{kapitel/eps/uml-input.pdf}
@@ -111,6 +111,7 @@ Relocating on the desktop target platform is done with the WASD keys of the keyb
   \label{fig:uml-universalinput}
 \end{figure}
 Selection of objects is done with the ray-casting method in both target platforms. How ray-casting in Unity works, is seen in example \ref{raycastcode}. The ray is created from the mouse position in line 2, which is always the center of the screen. In line 3 it is checked whether the ray hit a game object. If the condition is true, the game object which was pointed at is returned in the \texttt{hit} variable.
+\newpage
 \begin{lstlisting} 
 RaycastHit hit;
 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
@@ -134,29 +135,90 @@ if (Physics.Raycast(controller.transform.position,
 \captionof{lstlisting}{Ray initialized from the controller representation in the game}
 
 The method \texttt{Physics.Raycast} in line 2 creates the ray from the controller's position instead of the center screen this time. The method checks for objects hit by the ray at the same time.\\
-When changing every ray creation which is done in the game's code to the above showed solution, the game is working on the mobile VR platform but it is not working on the desktop anymore. In order to use ray-casting on every target platform without changing the code every time, an additional class has to be added. This class is able to detect which is the current target platform and also if the game is running in the editor gameplay mode. The class creates the ray from either the main camera or the current connected controller depending on the current target platform. It is also able to detect, if a controller is connected and if the controller is set as left or right hand used. In the UML-diagram in figure \ref{fig:uml-universalinput}, the UniversalInput class fulfills the above explained functionalities. The UML-diagram shown below only shows the method and fields relevant for the problem case of this chapter. Subclasses which are used by the UniversalInput class are not displayed in the diagram. The controller classes of the different game scenes use the methods of the UniversalInput class to get the selected object from the ray. It is now possible to play the application with the Samsung Gear VR and use the controller to point at selectable objects. At the same time, the game can be played on a desktop with selecting objects through the main camera focus.
+When changing every ray creation which is done in the game's code to the above showed solution, the game is working on the mobile VR platform but it is not working on the desktop anymore. In order to use ray-casting on every target platform without changing the code every time, an additional class has to be added. This class is called \texttt{UniversalInput} and is able to detect which is the current target platform and also if the game is running in the editor gameplay mode. The class creates the ray from either the main camera or the current connected controller. How this is done can be seen in listing \ref{raycastcode-combined}.
+\newpage
+\begin{lstlisting} 
+if (Application.isEditor)
+{
+    var ray = new Ray(Camera.main.transform.position, 
+                Camera.main.transform.forward);
+    RaycastHit hit;
+    Physics.Raycast(ray, out hit, 500);
+    return hit;
+}
+  
+Physics.Raycast(gameController.transform.position, 
+            gameController.transform.forward, out hit);
+return hit;
+\end{lstlisting}
+\label{raycastcode-combined}
+\captionof{lstlisting}{platform specific ray initializing}
+
+In line 1, we check whether the game is played in the Unity editor on desktop. If this is the case, the ray is created from the main camera. Otherwise the ray is created from the \texttt{gameController}. This object stores the current connected handheld controller.
+The \texttt{UniversalInput} class is also able to detect if a controller is connected and if the controller is set as left or right hand used. In the UML-diagram in figure \ref{fig:uml-universalinput} it can be seen which classes use \texttt{UniversalInput}. The UML-diagram shown below only shows the method and fields relevant for the problem case of this chapter. Subclasses are not displayed in the diagram. The controller classes of the different game scenes use the methods of \texttt{UniversalInput} to get the selected object from the ray. It is now possible to play the application with the Samsung Gear VR and use the controller to point at selectable objects. At the same time, the game can be played on a desktop with selecting objects through the main camera focus.
 
 \section{Implementation of the software engineer scene}
-The software engineer scene is a laboratory which can be entered through the world scene. The scene contains a mini game through which users can experience programming themselves. The laboratory design is held in a futuristic look with a lot of glass materials and a high amount of white and grey colors. Robots and drones as decoration element and futuristic furniture assets underline the futuristic look of the laboratory. One of the main challenges of this scene was to develop the coding mini game. The objective of the game is to write the code for a drone, which should be able to pickup a package. Another challenge, which occurred in all scenes of the game, but particularly in the software engineer scene was the user guidance. This section describes which task were done in this scene.
-\subsection{Coding mini game}
-As defined in the storyboard, the mini game in the software engineer scene is about arranging five different code blocks in a logical order. The code blocks contain method calls and a "if" control sequence. In order to start the mini game, the user has to sit on the work desk in the scene. \\
-The screenshot in figure \ref{TODO} describes the view of the mini game after sitting down on the chair. The code plates seen in the picture can be selected and dragged into the laptop screen. There they appear as code text on the screen. The buttons above the laptop are to exit the game, return the last step, enable or disable user input hints and to compile the game. \\
-Every code plate in the minigame has a component called \texttt{Draggable} attached to the game object. Through this component, objects follow the main camera direction or the controller direction when clicked on it. For releasing objects, users have to click again. Every time, a code plate collides with the screen object of the laptop, the plate disappears and the text on the plates appears on the screen. This is managed through the \texttt{Programming} class which is responsible for all visible changes in the mini game. Every time users drag a code plate into the screen, the name of the game object is added to the static string list variable \texttt{currentOrder}. This variable is stored inside the static class \texttt{ProgrammingLogic}. The \texttt{ProgrammingLogic} class also contains a list called \texttt{correctOrder}, which represents the right order of the code plate arrangement and a method \texttt{CheckSolution()}, which checks the both lists for equality.\\
-If the user solves the mini game correctly, the controller class of the scene invokes an animation of a drone flying around in the room and the user is asked to exit the laboratory.
+The software engineer scene is a laboratory which can be entered through the world scene. The scene contains a minigame through which users can experience programming themselves. The laboratory design is held in a futuristic look with glass materials and a high amount of white and grey colors. Robots and drones as decoration element and futuristic furniture assets underline the futuristic look of the laboratory. One of the main challenges of this scene was to develop the coding minigame. The objective of the game is to write the code for a drone which should be able to pickup a package. Another challenge which occurred in all scenes of the game, but particularly in the software engineer scene, was the user guidance.
+\subsection{Coding minigame}
+\label{minigame}
+As defined in the storyboard, the minigame in the software engineer scene is about arranging five different code blocks in a logical order. The code blocks contain method calls and a "if" control sequence. In order to start the minigame, the user has to sit on the work desk in the scene.
+\begin{figure}[h!]
+  \includegraphics[width=16cm]{kapitel/se-minigame2.PNG}
+  \centering
+  \caption{Screenshot of the coding minigame}
+  \label{fig:se-minigame}
+\end{figure}
+
+The screenshot in figure \ref{fig:se-minigame} describes the view of the minigame after sitting down on the chair. The code plates seen in the screenshot can be selected and dragged into the laptop screen. There they appear as code text on the screen. The buttons above the laptop are to exit the game, return the last step, enable or disable user input hints and to compile the game. \\
+In the following we explain how selecting and relocating of the code plates is realised.
+When the user clicks on a code plate, it always follows the position of the controller or the mouse. When the user clicks again, the code plate is released and has a fixed position again. This mechanism is similar to the drag and drop method. Every code plate has a component called \texttt{Draggable} which manages the dragging and releasing of the plates. The script has a variable called \texttt{current} which indicates if the plate is currently been dragged (state \texttt{Dragging}) or is in a fixed position(state \texttt{Ready}). When the user clicks on the plate, the code in listing \ref{dragging-states} is executed.
+ \newpage
+\begin{lstlisting} 
+if (current == State.Ready)
+{   
+    float distance = Vector3.Distance(gameObject.transform.position,
+        Camera.main.transform.position);
+    if (distance > maxDistance) return;
+    current = State.Dragging;
+}
+else if (current == State.Dragging)
+{
+    current = State.Ready;
+}
+\end{lstlisting}
+\label{dragging-states}
+\captionof{lstlisting}{State change when clicked a code plate}
+
+When the code plate is in state \texttt{Ready}, which means it is not dragged, it is checked whether the object is not too far away in line 5. If it is in range, the state is changed. If the code plate is already in state \texttt{dragging}, it is changed back to \texttt{Ready}. In the \texttt{Updade()} method, the position of the code plate is updated according to the mouse or controller position only if the current state is \texttt{Dragging}\\
+Every time, a code plate collides with the screen object of the laptop, the plate disappears and the text on the plates appears on the screen. This is managed by the \texttt{Programming} class which is responsible for all visible changes in the minigame. Every time users drag a code plate into the screen, the name of the game object is added to the static string list variable \texttt{currentOrder}. This variable is stored inside the static class \texttt{ProgrammingLogic}. The \texttt{ProgrammingLogic} class also contains a list called \texttt{correctOrder}, which represents the right order of the code plate arrangement and a method \texttt{CheckSolution()}, which checks the both lists for equality.\\
+If the user solves the minigame correctly, the controller class of the scene invokes an animation of a drone flying around in the room and the user is asked to exit the laboratory.
+
+\newpage
 \subsection{User guidance}
-TODO: Maybe describe hint label also
-As defined in the requirement in chapter \ref{design}, the game should encourage free exploration. On the same time, the user should always know where to go next and be able to detect interactive objects. In the software engineer scene, the desk, which the user has to click on to start the mini game, changes its texture when pointed a it.
-Every game object which should appear as interactive, needs to have a  tag "Clickable", which can be assigned to the editor. Inside the update method of the controller class, it is checked, if the user points at an object with this tag. Then the shader of this object is changed to a shader called \texttt{outlined}, which makes the object appear like in figure \ref{??}. In example \ref{code-highlight}, the current highlighted object is called \texttt{hit}. A reference of this object is stored to the object variable \texttt{focusedObject} in order to remove the shader once the focus changes.
+As defined in the requirement in chapter \ref{design}, the game should encourage free exploration. On the same time, the user should always know where to go next and be able to detect interactive objects. In the software engineer scene we realized this by highlighting interactive objects when the user points at them. For additional support, a textual hint appears, similar to a tooltip. The textual hint was inspired by the game Labster, introduced in chapter \ref{labster}. In this game, there were textual hints as well which give information about the current task and how to interact with the object.\\
+Every game object which should appear as interactive has a tag\texttt{Clickable} which can be assigned to the editor. Inside the update method of the controller class it is checked if the user points at an object with this tag. Then the shader of this object is changed to a shader called \texttt{outlined}, which makes the object appear like in figure \ref{fig:user-hints}.
+\begin{figure}[h!]
+  \includegraphics[width=13cm]{kapitel/user-hint-screenshot.PNG}
+  \centering
+  \caption{Highlighting of interactive objects with additional task description}
+  \label{fig:user-hints}
+\end{figure}
+
+In example \ref{code-highlight}, the current highlighted object is called \texttt{hit}. A reference of this object is stored to the object variable \texttt{focusedObject} in order to remove the shader once the focus changes.
+When the focus changes to another object, the standard shader is applied to the previous highlighted object.\\
+The above code example can be added to other controller classes as well, to highlight interactive objects in other lab scenes.
+\newpage
 \begin{lstlisting} 
 if (hit.tag == "Clickable" || hit.tag == "Draggable")
-        {
-            var renderer = hit.GetComponent<Renderer>();
-            if (renderer != null)
-               hit.GetComponent<Renderer>().material.shader = outlineShader;
-                focusedObject = hit;
-            }
-        }
+{
+    var renderer = hit.GetComponent<Renderer>();
+    if (renderer != null)
+    {
+        hit.GetComponent<Renderer>().material.shader = outlineShader;
+        focusedObject = hit;
+    }
+}
 \end{lstlisting} 
+\caption{Shader change when focusing object}
 \label{code-highlight}
-When the focus changes to another object, the standard shader is applied to the previous highlighted object.\\
-The above code example can be added to other controller classes as well, to highlight interactive objects in other lab scenes. In the world scene a similar method is used for indicating the builings which can be entered. Instead changing the shaders, the color was changed and a blinking animation was added, to attract the user's attention even more.
+For the hint label, a game object containing a plate and a 3D text, seen in figure \ref{fig:user-hints}, as well as the component \texttt{HelpLabel} is needed. We added the component to the game object which should be interactive, for example the chair in the software engineer scene, and set a reference to the 3D text object. The content of the hint text is set in the editor. Every time the user points at the chair, the hint label appears either in the middle of the screen or attached to the controller. The hint label disappears when the user unfocus the object. Internally the name of every interactive game object which has the \texttt{HelpLabel} script attached is added in a global list. In the \texttt{Update()} method of the \texttt{HelpLabel} it is checked whether the current object is in the list. If this is the case the hint label game object gets enabled with the accordint hint text. It also follows the position of  the main camera or controller with the same method as described in section \ref{minigame}.
